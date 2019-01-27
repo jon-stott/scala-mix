@@ -14,7 +14,7 @@ object JNE {
 
   val operationCode = MixByte(39)
 
-  val field = Field(0, 8)
+  val field = Field(1, 0)
 
   def apply(address: TwoSignedBytes): JNE = apply(address, MixByte(0))
   def apply(address: TwoSignedBytes, index: MixByte): JNE =
