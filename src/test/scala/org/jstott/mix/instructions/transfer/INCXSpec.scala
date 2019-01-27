@@ -15,6 +15,14 @@ class INCXSpec extends FlatSpec with Matchers {
     result.overflow shouldBe Off
   }
 
+  it should "increment with address and index without overflow" in {
+    val mix = Mix().withRegister(Extension, Word()).withRegister(Index1, TwoSignedBytes(2)).withOverflow(Off)
+    val incx = INCX(TwoSignedBytes.apply(1), MixByte(1))
+    val result = incx.compute(mix)
+    result.extension shouldBe Word(3)
+    result.overflow shouldBe Off
+  }
+
   it should "increment with overflow" in {
     val mix = Mix().withRegister(Extension, Word(Word.maxValue)).withOverflow(Off)
     val incx = INCX(TwoSignedBytes.apply(1))

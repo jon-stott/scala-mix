@@ -15,6 +15,14 @@ class INC1Spec extends FlatSpec with Matchers {
     result.overflow shouldBe Off
   }
 
+  it should "increment with address and index without overflow" in {
+    val mix = Mix().withRegister(Index1, TwoSignedBytes()).withRegister(Index2, TwoSignedBytes(2)).withOverflow(Off)
+    val inc1 = INC1(TwoSignedBytes.apply(1), MixByte(2))
+    val result = inc1.compute(mix)
+    result.index1 shouldBe TwoSignedBytes(3)
+    result.overflow shouldBe Off
+  }
+
   it should "increment with overflow" in {
     val mix = Mix().withRegister(Index1, TwoSignedBytes(TwoSignedBytes.maxValue)).withOverflow(Off)
     val inc1 = INC1(TwoSignedBytes.apply(1))

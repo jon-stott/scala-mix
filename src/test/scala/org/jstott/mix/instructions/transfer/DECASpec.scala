@@ -15,6 +15,14 @@ class DECASpec extends FlatSpec with Matchers {
     result.overflow shouldBe Off
   }
 
+  it should "decrement with address and index without overflow" in {
+    val mix = Mix().withRegister(Accumulator, Word()).withRegister(Index1, TwoSignedBytes(2)).withOverflow(Off)
+    val deca = DECA(TwoSignedBytes.apply(1), MixByte(1))
+    val result = deca.compute(mix)
+    result.accumulator shouldBe Word(-3)
+    result.overflow shouldBe Off
+  }
+
   it should "decrement with overflow" in {
     val mix = Mix().withRegister(Accumulator, Word(Word.minValue)).withOverflow(Off)
     val deca = DECA(TwoSignedBytes.apply(1))
