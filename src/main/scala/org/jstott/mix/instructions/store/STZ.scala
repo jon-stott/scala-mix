@@ -7,7 +7,7 @@ case class STZ(override val value: Word) extends ST {
   val name = "STZ"
 
   def compute(implicit mix: Mix): Mix = {
-    mix.withMemoryUpdated(Word(), A.intValue).incrementProgramCounter
+    mix.withMemoryUpdated(Word(), addressWithIndex(mix)).incrementProgramCounter
   }
 
 }
