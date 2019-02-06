@@ -181,7 +181,7 @@ object MixParser extends RegexParsers {
   def tokens: Parser[List[MixLine]] = {
     phrase(
       rep(
-        log(comment)("comment") | log(line)("line") | log(alf)("alf")
+        comment | line | alf
       )
     )
   }
