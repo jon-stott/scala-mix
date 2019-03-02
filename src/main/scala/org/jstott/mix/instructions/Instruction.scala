@@ -1,7 +1,7 @@
 package org.jstott.mix.instructions
 
 import org.jstott.mix.instructions.arithmetic.DIV
-import org.jstott.mix.instructions.comparison.CMPA
+import org.jstott.mix.instructions.comparison._
 import org.jstott.mix.instructions.conversion.{CHAR, NUM}
 import org.jstott.mix.instructions.io.{IOC, OUT}
 import org.jstott.mix.instructions.jump._
@@ -9,7 +9,7 @@ import org.jstott.mix.instructions.load._
 import org.jstott.mix.instructions.misc.{HLT, NOP}
 import org.jstott.mix.instructions.store._
 import org.jstott.mix.instructions.transfer._
-import org.jstott.mix.{MixByte, Mix, Plus, TwoSignedBytes, Word}
+import org.jstott.mix._
 
 trait Instruction {
 
@@ -203,13 +203,13 @@ object Instruction {
         case MixByte(55) if field == 3 => Some(ENNX(w))
         case MixByte(56) if field != 6 => Some(CMPA(w))
         //      case Byte(56) => Some(FCMPA(w))
-        //      case Byte(57) => Some(CMP1(w))
-        //      case Byte(58) => Some(CMP2(w))
-        //      case Byte(59) => Some(CMP3(w))
-        //      case Byte(60) => Some(CMP4(w))
-        //      case Byte(61) => Some(CMP5(w))
-        //      case Byte(62) => Some(CMP6(w))
-        //      case Byte(63) => Some(CMPX(w))
+        case MixByte(57) => Some(CMP1(w))
+        case MixByte(58) => Some(CMP2(w))
+        case MixByte(59) => Some(CMP3(w))
+        case MixByte(60) => Some(CMP4(w))
+        case MixByte(61) => Some(CMP5(w))
+        case MixByte(62) => Some(CMP6(w))
+        case MixByte(63) => Some(CMPX(w))
         case _ => None
       }
     } catch {

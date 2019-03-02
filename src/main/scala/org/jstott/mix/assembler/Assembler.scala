@@ -1,13 +1,13 @@
 package org.jstott.mix.assembler
 
 import org.jstott.mix.instructions.arithmetic.DIV
-import org.jstott.mix.instructions.comparison.CMPA
+import org.jstott.mix.instructions.comparison._
 import org.jstott.mix.instructions.conversion.{CHAR, NUM}
 import org.jstott.mix.instructions.io.{IOC, OUT}
 import org.jstott.mix.instructions.jump._
 import org.jstott.mix.instructions.load._
 import org.jstott.mix.instructions.misc.HLT
-import org.jstott.mix.{MixByte, Mix, Plus, TwoSignedBytes, Word}
+import org.jstott.mix._
 import org.jstott.mix.instructions.store._
 import org.jstott.mix.instructions.transfer._
 
@@ -81,6 +81,13 @@ class Assembler(code: String) {
         val newMix = line.operation match {
           case CharToken => mixWithSymbolHandled.withMemoryUpdated(CHAR.apply(TwoSignedBytes(a), MixByte.fromInt(i)).value, state.locationCounter)
           case CmpaToken => mixWithSymbolHandled.withMemoryUpdated(CMPA.apply(TwoSignedBytes(a), MixByte.fromInt(i), MixByte.fromInt(f)).value, state.locationCounter)
+          case Cmp1Token => mixWithSymbolHandled.withMemoryUpdated(CMP1.apply(TwoSignedBytes(a), MixByte.fromInt(i), MixByte.fromInt(f)).value, state.locationCounter)
+          case Cmp2Token => mixWithSymbolHandled.withMemoryUpdated(CMP2.apply(TwoSignedBytes(a), MixByte.fromInt(i), MixByte.fromInt(f)).value, state.locationCounter)
+          case Cmp3Token => mixWithSymbolHandled.withMemoryUpdated(CMP3.apply(TwoSignedBytes(a), MixByte.fromInt(i), MixByte.fromInt(f)).value, state.locationCounter)
+          case Cmp4Token => mixWithSymbolHandled.withMemoryUpdated(CMP4.apply(TwoSignedBytes(a), MixByte.fromInt(i), MixByte.fromInt(f)).value, state.locationCounter)
+          case Cmp5Token => mixWithSymbolHandled.withMemoryUpdated(CMP5.apply(TwoSignedBytes(a), MixByte.fromInt(i), MixByte.fromInt(f)).value, state.locationCounter)
+          case Cmp6Token => mixWithSymbolHandled.withMemoryUpdated(CMP6.apply(TwoSignedBytes(a), MixByte.fromInt(i), MixByte.fromInt(f)).value, state.locationCounter)
+          case CmpxToken => mixWithSymbolHandled.withMemoryUpdated(CMPX.apply(TwoSignedBytes(a), MixByte.fromInt(i), MixByte.fromInt(f)).value, state.locationCounter)
           case Dec1Token => mixWithSymbolHandled.withMemoryUpdated(DEC1.apply(TwoSignedBytes(a), MixByte.fromInt(i)).value, state.locationCounter)
           case Dec2Token => mixWithSymbolHandled.withMemoryUpdated(DEC2.apply(TwoSignedBytes(a), MixByte.fromInt(i)).value, state.locationCounter)
           case Dec3Token => mixWithSymbolHandled.withMemoryUpdated(DEC3.apply(TwoSignedBytes(a), MixByte.fromInt(i)).value, state.locationCounter)

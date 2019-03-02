@@ -24,6 +24,13 @@ case object OrigToken extends AssemblerToken
 
 case object CharToken extends OperatorToken { override def defaultField = Field(0, 1) }
 case object CmpaToken extends OperatorToken
+case object Cmp1Token extends OperatorToken
+case object Cmp2Token extends OperatorToken
+case object Cmp3Token extends OperatorToken
+case object Cmp4Token extends OperatorToken
+case object Cmp5Token extends OperatorToken
+case object Cmp6Token extends OperatorToken
+case object CmpxToken extends OperatorToken
 case object Dec1Token extends OperatorToken { override def defaultField = Field(0, 1) }
 case object Dec2Token extends OperatorToken { override def defaultField = Field(0, 1) }
 case object Dec3Token extends OperatorToken { override def defaultField = Field(0, 1) }

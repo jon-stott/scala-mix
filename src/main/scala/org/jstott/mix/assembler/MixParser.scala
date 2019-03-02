@@ -16,6 +16,13 @@ object MixParser extends RegexParsers {
 
   def char: Parser[CharToken.type] = "CHAR" ^^ { _ => CharToken }
   def cmpa: Parser[CmpaToken.type] = "CMPA" ^^ { _ => CmpaToken }
+  def cmp1: Parser[Cmp1Token.type] = "CMP1" ^^ { _ => Cmp1Token }
+  def cmp2: Parser[Cmp2Token.type] = "CMP2" ^^ { _ => Cmp2Token }
+  def cmp3: Parser[Cmp3Token.type] = "CMP3" ^^ { _ => Cmp3Token }
+  def cmp4: Parser[Cmp4Token.type] = "CMP4" ^^ { _ => Cmp4Token }
+  def cmp5: Parser[Cmp5Token.type] = "CMP5" ^^ { _ => Cmp5Token }
+  def cmp6: Parser[Cmp6Token.type] = "CMP6" ^^ { _ => Cmp6Token }
+  def cmpx: Parser[CmpxToken.type] = "CMPX" ^^ { _ => CmpxToken }
   def con: Parser[ConToken.type] = "CON" ^^ { _ => ConToken }
   def dec1: Parser[Dec1Token.type] = "DEC1" ^^ { _ => Dec1Token }
   def dec2: Parser[Dec2Token.type] = "DEC2" ^^ { _ => Dec2Token }
@@ -139,14 +146,14 @@ object MixParser extends RegexParsers {
   def stx: Parser[StxToken.type] = "STX" ^^ { _ => StxToken }
   def stz: Parser[StzToken.type] = "STZ" ^^ { _ => StzToken }
 
-  def operation: Parser[OperationToken] = char | cmpa | con | dec1 | dec2 | dec3 | dec4 | dec5 | dec6 | deca |
-    decx | div | end | enn1 | enn2 | enn3 | enn4 | enn5 | enn6 | enna | ennx | ent1 | ent2 | ent3 | ent4 | ent5 | ent6 |
-    enta | entx | equ | hlt | ioc | inc1 | inc2 | inc3 | inc4 | inc5 | inc6 | inca | incx | j1nn | j1np | j1nz | j1n |
-    j1p | j1z | j2nn | j2np | j2nz | j2n | j2p | j2z | j3nn | j3np | j3nz | j3n | j3p | j3z | j4nn | j4np | j4nz | j4n |
-    j4p | j4z | j5nn | j5np | j5nz | j5n | j5p | j5z | j6nn | j6np | j6nz | j6n | j6p | j6z | jann | janp | janz | jan |
-    jap | jaz | je | jge | jg | jle | jl | jmp | jne | jxnn | jxnp | jxnz | jxn | jxp | jxz | ld1n | ld1 | ld2n | ld2 |
-    ld3n | ld3 | ld4n | ld4 | ld5n | ld5 | ld6n | ld6 | ldan | lda | ldxn | ldx | num | orig | out | st1 | st2 | st3 |
-    st4 | st5 | st6 | sta | stj | stx | stz
+  def operation: Parser[OperationToken] = char | cmpa | cmp1 | cmp2 | cmp3 | cmp4 | cmp5 | cmp6 | cmpx | con | dec1 |
+    dec2 | dec3 | dec4 | dec5 | dec6 | deca | decx | div | end | enn1 | enn2 | enn3 | enn4 | enn5 | enn6 | enna |
+    ennx | ent1 | ent2 | ent3 | ent4 | ent5 | ent6 | enta | entx | equ | hlt | ioc | inc1 | inc2 | inc3 | inc4 | inc5 |
+    inc6 | inca | incx | j1nn | j1np | j1nz | j1n | j1p | j1z | j2nn | j2np | j2nz | j2n | j2p | j2z | j3nn | j3np |
+    j3nz | j3n | j3p | j3z | j4nn | j4np | j4nz | j4n | j4p | j4z | j5nn | j5np | j5nz | j5n | j5p | j5z | j6nn |
+    j6np | j6nz | j6n | j6p | j6z | jann | janp | janz | jan | jap | jaz | je | jge | jg | jle | jl | jmp | jne |
+    jxnn | jxnp | jxnz | jxn | jxp | jxz | ld1n | ld1 | ld2n | ld2 | ld3n | ld3 | ld4n | ld4 | ld5n | ld5 | ld6n |
+    ld6 | ldan | lda | ldxn | ldx | num | orig | out | st1 | st2 | st3 | st4 | st5 | st6 | sta | stj | stx | stz
 
   def address: Parser[AddressAST] = "\\S*".r ^^ { s =>
     val lexed = AddressLexer(s).right
