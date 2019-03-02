@@ -7,7 +7,7 @@ case class CMP1(override val value: Word) extends CMP {
   val name = "CMP1"
 
   def compute(implicit mix: Mix): Mix = {
-    mix.copy(comparisonIndicator = computeNewComparisonIndicator(mix, mix.a.intValue)).incrementProgramCounter
+    mix.copy(comparisonIndicator = computeNewComparisonIndicator(mix, mix.i1.intValue)).incrementProgramCounter
   }
 
 }
