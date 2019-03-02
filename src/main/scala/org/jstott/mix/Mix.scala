@@ -23,6 +23,7 @@ case class Mix(
                 programCounter: Int = 0,
                 symbols: Map[String, Either[AddressAST, Int]] = Map.empty,
                 localSymbols: Map[Int, Set[Int]] = Map.empty,
+                numExecutedInstructions: Int = 0,
                 executedInstructions: Seq[(Int, Instruction)] = Seq.empty,
                 terminate: Boolean = false
               ) {
@@ -94,7 +95,11 @@ case class Mix(
     val newMEC = memoryExecutionCount.updated(pc, memoryExecutionCount(pc) + 1)
     val instruction = Instruction.fromMemory(contents(pc))
     val newState = instruction match {
-      case Some(i) => i.compute(copy(memoryExecutionCount = newMEC, executedInstructions = executedInstructions :+ (pc, i)))
+      case Some(i) => i.compute(copy(
+        memoryExecutionCount = newMEC,
+        numExecutedInstructions = numExecutedInstructions + 1,
+        executedInstructions = executedInstructions :+ (pc, i)
+      ))
       case _ => this
     }
     newState
@@ -107,7 +112,8 @@ case class Mix(
        £|     rA = ${a.toString(suppressOperation = true)}   rX = ${x.toString(suppressOperation = true)}   rJ = ${j.toString}  |
        £|    rI1 = ${i1.toString}                         rI2 = ${i2.toString}                         rI3 = ${i3.toString}  |
        £|    rI4 = ${i4.toString}                         rI5 = ${i5.toString}                         rI6 = ${i6.toString}  |
-       £|     pc = $pc%5d                              overflow = $overflow%3s                              comparison = $comparisonIndicator%7s          |
+       £|     pc = $pc%7d                            overflow = $overflow%3s                              comparison = $comparisonIndicator%7s          |
+       £| # exec = $numExecutedInstructions%7d                                                                                                      |
        £+-----------------------------------------------------------------------------------------------------------------------+
        £$memoryToString
        £+-----------------------------------------------------------------------------------------------------------------------+
